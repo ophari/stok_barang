@@ -106,14 +106,11 @@
       integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
       crossorigin="anonymous"
     />
-    @livewireStyles
-
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     
   </head>
   <!--end::Head-->
   <!--begin::Body-->
-  @livewireScripts
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     
    
