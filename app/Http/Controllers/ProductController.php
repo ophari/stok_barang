@@ -24,19 +24,26 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:150',
-            'stock' => 'required|integer|min:0',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'category_id' => 'required|integer',
+        'price' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+        'description' => 'nullable|string'
+    ]);
 
-        Product::create($request->all());
+    Product::create([
+        'name' => $request->name,
+        'category_id' => $request->category_id,
+        'price' => str_replace('.', '', $request->price), // Pastikan input angka tanpa titik ribuan
+        'stock' => $request->stock,
+        'description' => $request->description
+    ]);
 
-        return redirect()->route('products.index')->with('success', 'Product created successfully.');
-    }
+    return redirect()->route('products.index')->with('success', 'Product added successfully!');
+}
+
 
     public function show(Product $product)
     {
@@ -53,22 +60,24 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:150',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|string|min:1',
             'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
-            'added_stock' => 'nullable|integer|min:0'
+            'stock' => 'required|integer|min:0'
         ]);
     
         $product->update([
             'name' => $request->name,
-            'stock' => $product->stock + ($request->added_stock ?? 0),
-            'price' => $request->price,
+            'stock' => $request->stock,
+            'price' => intval(str_replace('.', '', $request->price)), // Hapus titik ribuan sebelum simpan ke database
             'description' => $request->description,
             'category_id' => $request->category_id,
         ]);
     
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
+    
+
     
 
     public function destroy(Product $product)
@@ -82,5 +91,15 @@ class ProductController extends Controller
     $product->increment('stock', 1);
     
 }
+
+// public function supply(Request $request, $id)
+// {
+//     $product = Product::findOrFail($id);
+//     $product->stock += $request->add_stock; // Tambah stok baru
+//     $product->save();
+
+//     return redirect()->route('products.index')->with('success', 'Stock updated successfully!');
+// }
+
 
 }

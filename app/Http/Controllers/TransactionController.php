@@ -40,6 +40,12 @@ class TransactionController extends Controller
             $product->save();
         }
 
+        if ($transaction->type == 'in') {
+            $product = Product::find($request->product_id);
+            $product->stock += $request->quantity;
+            $product->save();
+        }
+
         return redirect()->route('transactions.index')->with('success', 'Transaction recorded successfully.');
     }
 }

@@ -48,6 +48,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/products/{product}/increase-stock', [ProductController::class, 'increaseStock']);
 
+    Route::put('/products/supply/{id}', [ProductController::class, 'supply'])->name('products.supply');
+
+
 });
 
 // Route untuk autentikasi (bawaan Laravel Breeze)
