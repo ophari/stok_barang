@@ -1,10 +1,10 @@
 <aside class="app-sidebar bg-body-secondary shadow">
-    <div class="sidebar-brand">
+    {{-- <div class="sidebar-brand">
         <a href="{{ route('dashboard') }}" class="brand-link">
             <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Admin Logo" class="brand-image opacity-75 shadow">
             <span class="brand-text fw-light">AdminLTE 4</span>
         </a>
-    </div>
+    </div> --}}
 
     <div class="sidebar-wrapper">
         <nav>

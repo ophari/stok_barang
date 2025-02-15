@@ -15,16 +15,29 @@ class Transaction extends Model
         'type',
         'quantity',
         'note',
-        'date'
+        'date',
+        'invoice_id', 
     ];
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class, 'invoice_id'); 
+    }
+
+    public function transactions()
+{
+    return $this->hasMany(Transaction::class, 'invoice_id');
 }
+
+}
+

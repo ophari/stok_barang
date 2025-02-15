@@ -22,6 +22,11 @@
                       <i class="nav-icon bi bi-box-seam"></i> <p>Products</p>
                   </a>
               </li>
+              <div class="nav-item">
+                  <a href="{{ route('categories.index') }}" class="nav-link text-dark rounded {{ request()->routeIs('categories.*') ? 'bg-light shadow-sm' : '' }}">
+                      <i class="nav-icon bi bi-tag"></i> <p>Categories</p>
+                  </a>
+              </div>
               <li class="nav-item">
                   <a href="{{ route('invoices.index') }}" class="nav-link text-dark rounded {{ request()->routeIs('invoices.*') ? 'bg-light shadow-sm' : '' }}">
                       <i class="nav-icon bi bi-file-earmark-text"></i> <p>Invoices</p>
