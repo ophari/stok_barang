@@ -37,6 +37,11 @@
                       <i class="nav-icon bi bi-clipboard-data"></i> <p>Transactions</p>
                   </a>
               </li>
+              <li class="nav-item">
+                  <a href="{{ route('reports.index') }}" class="nav-link text-dark rounded {{ request()->routeIs('reports.*') ? 'bg-light shadow-sm' : '' }}">
+                      <i class="nav-icon bi bi-bar-chart"></i> <p>Reports</p>
+                  </a>
+              </li>
           </ul>
       </nav>
   </div>

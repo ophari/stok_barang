@@ -1,20 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\InvoiceDetailController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Landing Page
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('home');
+Route::get('/', [DashboardController::class, 'index'])->middleware(['auth'])->name('Home');
 
 Route::get('/low-stock-notifications', [NavbarController::class, 'getLowStockNotifications'])
     ->name('lowStock.notifications');
@@ -62,8 +61,10 @@ Route::middleware('auth')->group(function () {
     Route::get('invoices/{invoice}/pdf', [InvoiceController::class, 'generatePdf'])->name('invoices.generatePdf');
 
     
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 
-    
+    Route::get('/transactions/view/{transaction}', [TransactionController::class, 'viewTransaction'])->name('transactions.view');
+
 
     // Manajemen Detail Invoice (Jika ingin edit invoice secara manual)
     Route::prefix('invoices/{invoice}/details')->group(function () {

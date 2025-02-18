@@ -36,7 +36,7 @@
                                         <div class="input-group">
                                             <span class="input-group-text">Rp</span>
                                             <input type="text" class="form-control" id="price" name="price" required placeholder="0" 
-                                                oninput="formatRupiah(this)" onblur="removeFormat(this)">
+                                                oninput="formatRupiah(this)" >
                                         </div>
                                     </div>
                                     
@@ -77,9 +77,6 @@
         input.value = value;
     }
     
-    function removeFormat(input) {
-        input.value = input.value.replace(/\./g, ''); // Hapus titik ribuan sebelum submit
-    }
     </script>
     
     

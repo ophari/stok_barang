@@ -33,9 +33,13 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @foreach($transactions as $transaction)
         <div class="col transaction-card" data-type="{{ $transaction->type }}">
-            <div class="card shadow-sm border-0">
+            <div class="card shadow-sm border-0"
+                 data-bs-toggle="modal"
+                 data-bs-target="#transactionModal"
+                 onclick="loadTransactionDetails({{ $transaction->id }})"
+                 style="cursor: pointer;">
                 <div class="card-body">
-                    <h5 class="card-title text-primary">
+                    <h5 class="card-title text-primary me-2">
                         <i class="bi bi-box-seam"></i> {{ $transaction->product->name }}
                     </h5> 
 
@@ -51,19 +55,6 @@
                     <p class="card-text text-muted">
                         <small><i class="bi bi-clock"></i> {{ $transaction->created_at->format('d M Y, H:i') }}</small>
                     </p>
-
-                   <!-- Tombol Download Invoice jika Stock Out -->
-                   @if($transaction->type == 'out' && $transaction->invoice_id)
-                   <p><strong>Customer:</strong> {{ $transaction->invoice->customer_name }}</p>
-                   <a href="{{ route('transactions.generatePdf', $transaction->invoice_id) }}" 
-                      class="btn btn-sm btn-outline-primary" 
-                      target="_blank" 
-                      rel="noopener noreferrer">
-                       <i class="bi bi-file-earmark-pdf"></i> Download Invoice
-                   </a>
-                   @else
-                       <span class="text-muted">No Invoice</span>
-                   @endif
                 </div>
             </div>
         </div>
@@ -73,9 +64,34 @@
     <!-- Pagination -->
     <div class="d-flex justify-content-center mt-3">
         {{ $transactions->links('pagination::simple-bootstrap-5') }}
-
     </div>
 </div>
+
+<!-- Modal Transaction Details -->
+<div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="modalTransactionContent">
+                <!-- Data akan dimuat dari view controller -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Loading Transaction Details -->
+<script>
+    function loadTransactionDetails(transactionId) {
+        fetch(`/transactions/view/${transactionId}`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('modalTransactionContent').innerHTML = data;
+            })
+            .catch(error => console.error('Error fetching transaction details:', error));
+    }
+</script>
+
+
+
 
 <!-- Modal Add Transaction -->
 @include('transactions.partials.add_transaction_modal')

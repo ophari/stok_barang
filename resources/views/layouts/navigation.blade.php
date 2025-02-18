@@ -33,6 +33,12 @@
                         <p>Transactions</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('reports.index') }}" class="nav-link">
+                        <i class="nav-icon bi bi-bar-chart-fill"></i>
+                        <p>Reports</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

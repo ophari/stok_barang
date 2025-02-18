@@ -57,16 +57,30 @@
                             <td class="fw-bold">Rp{{ number_format($product->price, 2) }}</td>
                             <td>{{ $product->category->name ?? '-' }}</td>
                             <td>
+                                <!-- View Button -->
+                                <button class="btn btn-outline-primary btn-sm rounded-circle" data-bs-toggle="modal"
+                                    data-bs-target="#viewProductModal"
+                                    onclick="viewProduct('{{ $product->name }}', '{{ $product->category->name ?? '-' }}', 
+                                    '{{ number_format($product->price, 2) }}', '{{ $product->stock }}', '{{ $product->description }}')">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+
+                                <!-- Edit Button -->
                                 <button class="btn btn-outline-warning btn-sm rounded-circle" data-bs-toggle="modal" 
-                                    data-bs-target="#editProductModal-{{ $product->id }}">
+                                    data-bs-target="#editProductModal"
+                                    onclick="editProduct('{{ $product->id }}', '{{ $product->name }}', '{{ $product->category->id ?? '' }}', 
+                                    '{{ $product->price }}', '{{ $product->stock }}', '{{ $product->description }}')">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
                                 
-                                <button class="btn btn-outline-success btn-sm rounded-circle" data-bs-toggle="modal" 
-                                    data-bs-target="#supplyProductModal-{{ $product->id }}">
+                                <!-- Supply Button -->
+                                <button class="btn btn-outline-success btn-sm rounded-circle" data-bs-toggle="modal"
+                                    data-bs-target="#supplyProductModal"
+                                    onclick="supplyProduct('{{ $product->id }}', '{{ $product->name }}', '{{ $product->stock }}')">
                                     <i class="bi bi-plus-circle"></i>
                                 </button>
 
+                                <!-- Delete Button -->
                                 <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
@@ -76,10 +90,6 @@
                                 </form>
                             </td>
                         </tr>
-
-                        <!-- Include Modals -->
-                        @include('products.partials.edit-product-modal', ['product' => $product])
-                        @include('products.partials.supply-product-modal', ['product' => $product])
 
                         @empty
                         <tr>
@@ -91,59 +101,43 @@
             </div>
 
             <!-- Pagination -->
-            <div class="d-flex justify-content-center">
+
                 {{ $products->links('pagination::bootstrap-5') }}
-            </div>
+
         </div>
     </div>
 </div>
 
-<!-- Include Modal -->
+<!-- Include Modals -->
 @include('products.partials.product-modal')
-
-<!-- Include View Modal -->
 @include('products.partials.view-product-modal')
-
-<!-- Include Edit Modal -->
 @include('products.partials.edit-product-modal')
-
-<!-- Include Supply Modal -->
 @include('products.partials.supply-product-modal')
 
-
-
-
-
 <script>
-  function viewProduct(name, category, price, stock, description) {
-      document.getElementById("productName").innerText = name;
-      document.getElementById("productCategory").innerText = category;
-      document.getElementById("productPrice").innerText = "Rp " + price;
-      document.getElementById("productStock").innerText = stock;
-      document.getElementById("productDescription").innerText = description;
-  }
-</script>
+    function viewProduct(name, category, price, stock, description) {
+        document.getElementById("productName").innerText = name;
+        document.getElementById("productCategory").innerText = category;
+        document.getElementById("productPrice").innerText = "Rp " + price;
+        document.getElementById("productStock").innerText = stock;
+        document.getElementById("productDescription").innerText = description;
+    }
 
-<script>
-  function editProduct(id, name, category, price, stock, description) {
-      document.getElementById("editProductForm").action = "/products/" + id;
-      document.getElementById("editName").value = name;
-      document.getElementById("editCategory").value = category;
-      document.getElementById("editPrice").value = new Intl.NumberFormat("id-ID").format(price); // Format harga ke "Rp" saat modal dibuka
-      document.getElementById("editStock").value = stock;
-      document.getElementById("editDescription").value = description;
-  }
-  </script>
-  
-  
+    function editProduct(id, name, category, price, stock, description) {
+        let form = document.getElementById("editProductForm");
+        form.action = "/products/" + id;
+        document.getElementById("editName").value = name;
+        document.getElementById("editCategory").value = category;
+        document.getElementById("editPrice").value = price;
+        document.getElementById("editStock").value = stock;
+        document.getElementById("editDescription").value = description;
+    }
 
-<script>
-  function supplyProduct(id, name, stock) {
-      document.getElementById("supplyProductForm").action = "/products/supply/" + id;
-      document.getElementById("supplyProductName").value = name;
-      document.getElementById("currentStock").value = stock;
-      document.getElementById("addStock").value = ""; // Reset input
-  }
+    function supplyProduct(id, name, stock) {
+        document.getElementById("supplyProductForm").action = "/products/supply/" + id;
+        document.getElementById("supplyProductName").value = name;
+        document.getElementById("currentStock").value = stock;
+    }
 </script>
 
 @endsection

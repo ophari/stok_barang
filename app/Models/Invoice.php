@@ -14,6 +14,7 @@ class Invoice extends Model
         'invoice_number',
         'user_id',
         'customer_name',
+        'receiver_name',
         'total_amount',
         'date'
     ];

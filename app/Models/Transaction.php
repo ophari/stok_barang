@@ -16,7 +16,10 @@ class Transaction extends Model
         'quantity',
         'note',
         'date',
-        'invoice_id', 
+        'invoice_id',
+        'customer_name',
+        'receiver_name',
+        'address', // Pastikan address ada di sini
     ];
 
     public function product()
@@ -31,13 +34,14 @@ class Transaction extends Model
 
     public function invoice()
     {
-        return $this->belongsTo(Invoice::class, 'invoice_id'); 
+        return $this->belongsTo(Invoice::class, 'invoice_id');
     }
 
     public function transactions()
-{
-    return $this->hasMany(Transaction::class, 'invoice_id');
+    {
+        return $this->hasMany(Transaction::class, 'invoice_id');
+    }
 }
 
-}
+
 
