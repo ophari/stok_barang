@@ -3,8 +3,8 @@
   <!--begin::Sidebar Brand-->
   <div class="sidebar-brand text-center py-3">
       <a href="{{ route('dashboard') }}" class="brand-link text-dark fw-bold">
-          <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Admin Logo" class="brand-image shadow-sm" width="40">
-          <span class="brand-text ms-2">AdminLTE 4</span>
+          <img class="brand-image rounded-circle" src="{{ Vite::asset('resources/img/logohero.jpeg') }}" alt="Admin Logo" class="brand-image shadow-sm" width="40">
+          <span class="brand-text ms-2">Stok Barang</span>
       </a>
   </div>
 
@@ -40,6 +40,12 @@
               <li class="nav-item">
                   <a href="{{ route('reports.index') }}" class="nav-link text-dark rounded {{ request()->routeIs('reports.*') ? 'bg-light shadow-sm' : '' }}">
                       <i class="nav-icon bi bi-bar-chart"></i> <p>Reports</p>
+                  </a>
+              </li>
+
+              <li class="nav-item">
+                  <a href="{{ route('users.index') }}" class="nav-link text-dark rounded {{ request()->routeIs('users.*') ? 'bg-light shadow-sm' : '' }}">
+                      <i class="nav-icon bi bi-people"></i> <p>Users</p>
                   </a>
               </li>
           </ul>

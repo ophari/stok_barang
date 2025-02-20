@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\InvoiceDetailController;
+use App\Http\Controllers\Users;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Landing Page
@@ -60,7 +61,9 @@ Route::middleware('auth')->group(function () {
     Route::get('invoices/{invoice}/pdf', [InvoiceController::class, 'generatePdf'])->name('transactions.generatePdf');
     Route::get('invoices/{invoice}/pdf', [InvoiceController::class, 'generatePdf'])->name('invoices.generatePdf');
 
-    
+    Route::resource('/users', Users::class);
+Route::get('/users/view/{user}', [Users::class, 'viewUser'])->name('users.view');
+
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 
     Route::get('/transactions/view/{transaction}', [TransactionController::class, 'viewTransaction'])->name('transactions.view');

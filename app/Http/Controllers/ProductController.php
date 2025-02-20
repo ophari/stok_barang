@@ -42,24 +42,29 @@ class ProductController extends Controller
 
     public function store(Request $request)
 {
+    // Hapus dd($request);
+    
     $request->validate([
         'name' => 'required|string|max:255',
         'category_id' => 'required|integer',
-        'price' => 'required|numeric|min:0',
+        'price' => 'required|string|min:0',
         'stock' => 'required|integer|min:0',
         'description' => 'nullable|string'
     ]);
 
+    $price = str_replace('.', '', $request->price); // Pastikan angka tanpa titik
+
     Product::create([
         'name' => $request->name,
         'category_id' => $request->category_id,
-        'price' => str_replace('.', '', $request->price), // Pastikan input angka tanpa titik ribuan
+        'price' => $price,
         'stock' => $request->stock,
         'description' => $request->description
     ]);
 
     return redirect()->route('products.index')->with('success', 'Product added successfully!');
 }
+
 
 
     public function show(Product $product)

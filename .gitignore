@@ -1,4 +1,3 @@
-# Laravel
 /.phpunit.cache
 /node_modules
 /public/build
@@ -7,45 +6,18 @@
 /storage/*.key
 /storage/pail
 /vendor
-
-# Environment files
 .env
 .env.backup
 .env.production
-
-# PHPUnit
 .phpactor.json
 .phpunit.result.cache
-
-# Homestead (Jika digunakan)
 Homestead.json
 Homestead.yaml
-
-# Logs & Errors
 npm-debug.log
 yarn-error.log
-
-# Laravel Nova & Jetstream
 /auth.json
-/.nova
-
-# IDE & Editor Config
 /.fleet
 /.idea
+/.nova
 /.vscode
 /.zed
-
-# Docker Files & Folders
-docker-compose.yml
-docker-compose.override.yml
-Dockerfile
-/docker/
-mysql_data/
-mailpit_data/
-
-# MacOS & System Files
-.DS_Store
-Thumbs.db
-
-# Fleet, PHPStorm, and other JetBrains IDEs
-/.fleet/
