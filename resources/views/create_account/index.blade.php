@@ -41,17 +41,20 @@
                             </span>
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary" 
-                                    onclick="loadUserDetails({{ $user->id }})"
-                                    data-bs-toggle="modal" data-bs-target="#editUserModal">
-                                <i class="bi bi-pencil"></i> Edit
+                            <!-- Edit Button -->
+                            <button class="btn btn-outline-warning btn-sm rounded-circle"
+                            data-bs-toggle="modal" data-bs-target="#editUserModal"
+                            onclick="loadUserDetails('{{ $user->id }}', '{{ $user->name }}', '{{ $user->username }}',
+                            '{{ $user->email }}', '{{ $user->role }}')">
+                            <i class="bi bi-pencil-square"></i>
                             </button>
+
                             <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                <button type="submit" class="btn  btn-sm rounded-circle btn-outline-danger"
                                         onclick="return confirm('Are you sure?')">
-                                    <i class="bi bi-trash"></i> Delete
+                                    <i class="bi bi-trash"></i> 
                                 </button>
                             </form>
                         </td>

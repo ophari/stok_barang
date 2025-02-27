@@ -13,7 +13,7 @@
         <div class="col-md-6 text-end">
             <form action="{{ route('invoices.index') }}" method="GET" class="d-flex align-items-center">
                 <div class="input-group input-group-sm">
-                    <input type="text" name="search" class="form-control rounded-pill" 
+                    <input type="text" name="search" class="form-control rounded-pill"
                            placeholder="🔍 Search invoice..." value="{{ request('search') }}">
                     <button type="submit" class="btn btn-secondary rounded-pill ms-2">
                         <i class="bi bi-search"></i>
@@ -56,7 +56,7 @@
                                 <td>Rp {{ number_format($invoice->total_amount, 2) }}</td>
                                 <td>{{ $invoice->date->format('d M Y') }}</td>
                                 <td>
-                                    <a href="{{ route('invoices.generatePdf', $invoice->id) }}" 
+                                    <a href="{{ route('invoices.generatePdf', $invoice->id) }}"
                                        class="btn btn-sm btn-outline-primary rounded-pill" target="_blank">
                                         <i class="bi bi-file-earmark-pdf"></i> Download
                                     </a>
@@ -89,9 +89,8 @@
                             <tr>
                                 <td>{{ $invoice->invoice_number }}</td>
                                 <td>{{ $invoice->receiver_name }}</td>
-                                <td>{{ $invoice->recipe ?? '-' }}</td> <!-- Recipe bisa kosong -->
                                 <td>{{ $invoice->date->format('d M Y') }}</td>
-                                
+
                             </tr>
                         @empty
                             <tr>

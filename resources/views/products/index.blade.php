@@ -15,11 +15,11 @@
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <h3 class="m-0 fw-bold">📦 Products</h3>
 
-                <!-- Search Form (Compact & Modern) -->
+                <!-- Search Form -->
                 <div class="col-md-6 text-end">
                     <form action="{{ route('products.index') }}" method="GET" class="d-flex align-items-center">
                         <div class="input-group input-group-sm">
-                            <input type="text" name="search" class="form-control rounded-pill" 
+                            <input type="text" name="search" class="form-control rounded-pill"
                                    placeholder="🔍 Search product..." value="{{ request('search') }}">
                             <button type="submit" class="btn btn-secondary rounded-pill ms-2">
                                 <i class="bi bi-search"></i>
@@ -28,9 +28,12 @@
                     </form>
                 </div>
 
+                <!-- Hanya Supervisor Bisa Menambah Produk -->
+                @if(auth()->user()->role === 'supervisor')
                 <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#addProductModal">
                     <i class="bi bi-plus-circle"></i> Add Product
                 </button>
+                @endif
             </div>
         </nav>
 
@@ -45,7 +48,9 @@
                             <th>Stock</th>
                             <th>Price</th>
                             <th>Category</th>
+                            @if(auth()->user()->role === 'supervisor')
                             <th>Actions</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -56,23 +61,24 @@
                             <td><span class="badge bg-info">{{ $product->stock }}</span></td>
                             <td class="fw-bold">Rp{{ number_format($product->price, 2) }}</td>
                             <td>{{ $product->category->name ?? '-' }}</td>
+                            @if(auth()->user()->role === 'supervisor')
                             <td>
-                                <!-- View Button -->
+                                <!-- View Button (Bisa Diakses Semua User) -->
                                 <button class="btn btn-outline-primary btn-sm rounded-circle" data-bs-toggle="modal"
                                     data-bs-target="#viewProductModal"
-                                    onclick="viewProduct('{{ $product->name }}', '{{ $product->category->name ?? '-' }}', 
+                                    onclick="viewProduct('{{ $product->name }}', '{{ $product->category->name ?? '-' }}',
                                     '{{ number_format($product->price, 2) }}', '{{ $product->stock }}', '{{ $product->description }}')">
                                     <i class="bi bi-eye"></i>
                                 </button>
 
                                 <!-- Edit Button -->
-                                <button class="btn btn-outline-warning btn-sm rounded-circle" data-bs-toggle="modal" 
+                                <button class="btn btn-outline-warning btn-sm rounded-circle" data-bs-toggle="modal"
                                     data-bs-target="#editProductModal"
-                                    onclick="editProduct('{{ $product->id }}', '{{ $product->name }}', '{{ $product->category->id ?? '' }}', 
+                                    onclick="editProduct('{{ $product->id }}', '{{ $product->name }}', '{{ $product->category->id ?? '' }}',
                                     '{{ $product->price }}', '{{ $product->stock }}', '{{ $product->description }}')">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                                
+
                                 <!-- Supply Button -->
                                 <button class="btn btn-outline-success btn-sm rounded-circle" data-bs-toggle="modal"
                                     data-bs-target="#supplyProductModal"
@@ -89,11 +95,14 @@
                                     </button>
                                 </form>
                             </td>
+                            @endif
                         </tr>
 
                         @empty
                         <tr>
-                            <td colspan="6" class="text-center text-muted">No products found.</td>
+                            <td colspan="{{ auth()->user()->role === 'supervisor' ? '6' : '5' }}" class="text-center text-muted">
+                                No products found.
+                            </td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -101,8 +110,7 @@
             </div>
 
             <!-- Pagination -->
-
-                {{ $products->links('pagination::bootstrap-5') }}
+            {{ $products->links('pagination::bootstrap-5') }}
 
         </div>
     </div>

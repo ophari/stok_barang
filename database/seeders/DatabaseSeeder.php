@@ -20,7 +20,19 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@example.com',
             'email_verified_at' => now(),
+            'role' => 'supervisor',
             'password' => Hash::make('admin00000'), // Pastikan Hash sudah diimpor
+            'remember_token' => Str::random(10),
+        ]);
+
+        // Buat akun staff
+        User::create([
+            'name' => 'Staff',
+            'username' => 'staff',
+            'email' => 'staff@example.com',
+            'email_verified_at' => now(),
+            'role' => 'staff',
+            'password' => Hash::make('staff00000'), // Pastikan Hash sudah diimpor
             'remember_token' => Str::random(10),
         ]);
 
