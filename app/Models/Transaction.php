@@ -19,7 +19,7 @@ class Transaction extends Model
         'invoice_id',
         'customer_name',
         'receiver_name',
-        'address', // Pastikan address ada di sini
+        'address',
     ];
 
     public function product()

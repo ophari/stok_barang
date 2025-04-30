@@ -41,11 +41,11 @@
                                         <label for="editPrice" class="form-label">Price</label>
                                         <div class="input-group">
                                             <span class="input-group-text">Rp</span>
-                                            <input type="text" class="form-control" id="editPrice" name="price" required 
+                                            <input type="text" class="form-control" id="editPrice" name="price" required
                                                 oninput="formatRupiah(this)">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="mb-3">
                                         <label for="editStock" class="form-label">Stock</label>
                                         <div class="input-group">
@@ -83,6 +83,6 @@
         value = new Intl.NumberFormat("id-ID").format(value); // Format ke Rupiah (Indonesia)
         input.value = value;
     }
-    
-    
+
+
 </script>

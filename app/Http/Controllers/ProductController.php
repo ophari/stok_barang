@@ -11,7 +11,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-    
+
         $products = Product::with('category')
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'like', "%{$search}%")
@@ -24,12 +24,12 @@ class ProductController extends Controller
             ->orderBy('name', 'asc')
             ->paginate(5)
             ->appends(['search' => $search]); // Menyimpan query pencarian saat pindah halaman
-    
+
         $categories = Category::all();
-    
+
         return view('products.index', compact('products', 'categories'));
     }
-    
+
 
 
 
@@ -42,8 +42,8 @@ class ProductController extends Controller
 
     public function store(Request $request)
 {
-    // Hapus dd($request);
-    
+
+
     $request->validate([
         'name' => 'required|string|max:255',
         'category_id' => 'required|integer',
@@ -87,7 +87,7 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'stock' => 'required|integer|min:0'
         ]);
-    
+
         $product->update([
             'name' => $request->name,
             'stock' => $request->stock,
@@ -95,12 +95,12 @@ class ProductController extends Controller
             'description' => $request->description,
             'category_id' => $request->category_id,
         ]);
-    
+
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
-    
 
-    
+
+
 
     public function destroy(Product $product)
     {
@@ -108,20 +108,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 
-    public function increaseStock(Product $product)
-{
-    $product->increment('stock', 1);
-    
-}
-
-// public function supply(Request $request, $id)
-// {
-//     $product = Product::findOrFail($id);
-//     $product->stock += $request->add_stock; // Tambah stok baru
-//     $product->save();
-
-//     return redirect()->route('products.index')->with('success', 'Stock updated successfully!');
-// }
+  
 
 
 }

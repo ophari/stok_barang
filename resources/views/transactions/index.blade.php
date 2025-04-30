@@ -41,15 +41,15 @@
                 <div class="card-body">
                     <h5 class="card-title text-primary me-2">
                         <i class="bi bi-box-seam"></i> {{ $transaction->product->name }}
-                    </h5> 
+                    </h5>
 
                     <p class="card-text">
-                        <strong>Type:</strong> 
+                        <strong>Type:</strong>
                         <span class="badge {{ $transaction->type == 'in' ? 'bg-success' : 'bg-danger' }}">
                             {{ ucfirst($transaction->type) }}
                         </span>
                     </p>
-                    
+
                     <p class="card-text"><strong>Quantity:</strong> {{ $transaction->quantity }}</p>
                     <p class="card-text"><strong>Note:</strong> {{ $transaction->note ?? 'N/A' }}</p>
                     <p class="card-text text-muted">
@@ -60,7 +60,7 @@
         </div>
         @endforeach
     </div>
-    
+
     <!-- Pagination -->
     <div class="d-flex justify-content-center mt-3">
         {{ $transactions->links('pagination::simple-bootstrap-5') }}

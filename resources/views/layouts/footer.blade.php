@@ -1,3 +1,3 @@
 <footer class="app-footer">
-    <strong>Copyright &copy; 2024 <a href="#">AdminLTE</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2024 <a href="#">Muhamad Yusuf</a>.</strong> All rights reserved.
 </footer>

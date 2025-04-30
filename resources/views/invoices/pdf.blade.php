@@ -28,8 +28,12 @@
             border-radius: 8px 8px 0 0;
         }
         .logo {
-            max-height: 50px;
-        }
+        max-height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
         .invoice-number {
             font-size: 20px;
             font-weight: bold;
@@ -88,22 +92,14 @@
 
     <div class="invoice-box">
         <div class="header">
-            <img src="{{ asset('images/logo.png') }}" alt="Company Logo" class="logo">
+            <img src="{{ public_path('img/logohero.jpeg') }}" alt="Company Logo" class="logo">
+
             <div class="invoice-number">Invoice #{{ $invoice->invoice_number }}</div>
         </div>
 
         <div class="details">
-            <p><strong>From:</strong></p>
-            <p>{{ env('COMPANY_NAME', 'Your Company Name') }}</p>
-            <p>Email: {{ env('COMPANY_EMAIL', 'company@example.com') }}</p>
-            <p>Phone: {{ env('COMPANY_PHONE', '123-456-7890') }}</p>
-        </div>
-
-        <div class="details">
-            <p><strong>Billed To:</strong></p>
-            <p>{{ $invoice->customer_name }}</p>
-            <p>Email: {{ $invoice->customer_email ?? 'No Email' }}</p>
-            <p>Address: {{ $invoice->customer_address ?? 'No Address' }}</p>
+            <p><strong>Billed To:</strong> {{ $invoice->customer_name }}</p>
+            <p><strong>Address:</strong> {{ $transaction->address ?? 'No Address' }}</p>
             <p><strong>Date:</strong> {{ \Carbon\Carbon::parse($invoice->date)->format('Y-m-d') }}</p>
         </div>
 
@@ -121,25 +117,19 @@
                 <tr>
                     <td>{{ $detail->product->name }}</td>
                     <td>{{ $detail->quantity }}</td>
-                    <td>${{ number_format($detail->price, 2) }}</td>
-                    <td class="text-right">${{ number_format($detail->subtotal, 2) }}</td>
+                    <td>Rp{{ number_format($detail->price, 2) }}</td>
+                    <td class="text-right">Rp{{ number_format($detail->subtotal, 2) }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
 
         <div class="total-section">
-            <p>Subtotal: ${{ number_format($invoice->subtotal, 2) }}</p>
-            <p>Shipping: ${{ number_format($invoice->shipping ?? 0, 2) }}</p>
-            <p><strong>Total: ${{ number_format($invoice->total_amount, 2) }}</strong></p>
-
-            @if($invoice->is_paid)
-            <div class="paid-badge">PAID</div>
-            @endif
+            <p><strong>Total: Rp{{ number_format($invoice->total_amount, 2) }}</strong></p>
         </div>
 
         <div class="footer">
-            <p>THANK YOU FOR YOUR BUSINESS!</p>
+            <p>THANK YOU </p>
         </div>
     </div>
 

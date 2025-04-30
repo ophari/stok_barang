@@ -42,12 +42,13 @@
                       <i class="nav-icon bi bi-bar-chart"></i> <p>Reports</p>
                   </a>
               </li>
-
+              @if(auth()->user()->role === 'supervisor')
               <li class="nav-item">
                   <a href="{{ route('users.index') }}" class="nav-link text-dark rounded {{ request()->routeIs('users.*') ? 'bg-light shadow-sm' : '' }}">
                       <i class="nav-icon bi bi-people"></i> <p>Users</p>
                   </a>
               </li>
+              @endif
           </ul>
       </nav>
   </div>
