@@ -1,3 +1,6 @@
+
+# 📦 Web Stok Barang
+
 ## 🔧 Persyaratan Sistem
 
 * PHP >= 8.2
@@ -20,7 +23,7 @@ composer install
 cp .env.example .env
 
 # 4. Atur konfigurasi database di file .env
-```
+````
 
 Contoh konfigurasi `.env`:
 
@@ -60,6 +63,5 @@ Aplikasi dapat diakses melalui `http://localhost:8000`
 
 * **Username:** `staff`
 * **Password:** `staff00000`
-
 
 
