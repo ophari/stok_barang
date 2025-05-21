@@ -1,7 +1,0 @@
-vendor/
-node_modules/
-storage/
-.env
-.git
-.gitignore
-Dockerfile
