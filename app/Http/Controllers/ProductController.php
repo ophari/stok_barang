@@ -82,7 +82,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:150',
-            'price' => 'required|string|min:1',
+            'price' => 'required',
             'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
             'stock' => 'required|integer|min:0'
@@ -108,7 +108,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 
-  
+
 
 
 }

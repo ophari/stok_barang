@@ -51,7 +51,7 @@ class CategoryController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|string|max:100|unique:categories,name,' . $category->id
+                'name' => 'required'
             ]);
 
             $category->update($request->all());
