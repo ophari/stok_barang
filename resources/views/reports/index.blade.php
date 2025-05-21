@@ -59,7 +59,7 @@
                                     <td>{{ $transaction->product->name ?? '-' }}</td>
                                     <td>{{ $transaction->quantity }}</td>
                                     <td>{{ $transaction->invoice->customer_name ?? '-' }}</td>
-                                    <td>{{ $transaction->invoice->address ?? '-' }}</td>
+                                    <td>{{ $transaction->address ?? '-' }}</td>
                                 </tr>
                                 @empty
                                 <tr>

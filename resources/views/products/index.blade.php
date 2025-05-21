@@ -79,13 +79,6 @@
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
 
-                                <!-- Supply Button -->
-                                <button class="btn btn-outline-success btn-sm rounded-circle" data-bs-toggle="modal"
-                                    data-bs-target="#supplyProductModal"
-                                    onclick="supplyProduct('{{ $product->id }}', '{{ $product->name }}', '{{ $product->stock }}')">
-                                    <i class="bi bi-plus-circle"></i>
-                                </button>
-
                                 <!-- Delete Button -->
                                 <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
                                     @csrf
@@ -120,7 +113,6 @@
 @include('products.partials.product-modal')
 @include('products.partials.view-product-modal')
 @include('products.partials.edit-product-modal')
-@include('products.partials.supply-product-modal')
 
 <script>
     function viewProduct(name, category, price, stock, description) {

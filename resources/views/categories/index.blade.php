@@ -67,9 +67,6 @@
 @include('categories.partials.add_modal')
 @include('categories.partials.edit_modal')
 
-@endsection
-
-@section('scripts')
 <script>
     document.querySelectorAll('.editCategoryBtn').forEach(button => {
         button.addEventListener('click', function () {
@@ -78,4 +75,8 @@
         });
     });
 </script>
+
+
 @endsection
+
+

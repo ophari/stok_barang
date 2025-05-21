@@ -22,7 +22,7 @@
     @include('layouts.header') <!-- Navbar -->
     <!-- Wrapper -->
     <div class="app-wrapper">
-       
+
         <div class="d-flex">
             @include('layouts.sidebar') <!-- Sidebar -->
             <main class="app-main flex-grow-1 p-3">
@@ -66,7 +66,7 @@
   <!--begin::Head-->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AdminLTE 4 | Simple Tables</title>
+    <title>Stok barang</title>
     <!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="AdminLTE 4 | Simple Tables" />
@@ -82,7 +82,7 @@
     <!-- Load CSS dari Vite -->
     @vite(['resources/css/app.css'])
 
-   
+
 
     <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
@@ -109,13 +109,13 @@
       crossorigin="anonymous"
     />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
-    
+
   </head>
   <!--end::Head-->
   <!--begin::Body-->
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    
-   
+
+
    <!--begin::App Wrapper-->
     <div class="app-wrapper">
         @include('layouts.header') <!-- Navbar -->
@@ -130,25 +130,25 @@
           </div>
           <!--end::Container-->
         </div>
-     
+
         <!--begin::App Content-->
         <div class="app-content">
           <!--begin::Container-->
           <div class="container-fluid">
-          
+
           </div>
           <!--end::Container-->
         </div>
-      
+
         <!--end::App Content-->
       </main>
       <!--end::App Main-->
       @include('layouts.footer') <!-- Footer -->
     </div>
-   
+
     <!--end::App Wrapper-->
     <!--begin::Script-->
-    
+
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
     <script
       src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"

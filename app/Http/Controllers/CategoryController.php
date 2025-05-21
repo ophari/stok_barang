@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Exception;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        try {
+            $categories = Category::all();
+            return view('categories.index', compact('categories'));
+        } catch (Exception $e) {
+            return redirect()->route('categories.index')->with('error', 'Failed to load categories: ' . $e->getMessage());
+        }
     }
 
     public function create()
@@ -20,13 +25,16 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:100|unique:categories'
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:100|unique:categories'
+            ]);
 
-        Category::create($request->all());
-
-        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
+            Category::create($request->all());
+            return redirect()->route('categories.index')->with('success', 'Category created successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('categories.create')->with('error', 'Failed to create category: ' . $e->getMessage());
+        }
     }
 
     public function show(Category $category)
@@ -41,19 +49,25 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        $request->validate([
-            'name' => 'required|string|max:100|unique:categories,name,' . $category->id
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required'
+            ]);
 
-        $category->update($request->all());
-
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+            $category->update($request->all());
+            return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('categories.edit', $category->id)->with('error', 'Failed to update category: ' . $e->getMessage());
+        }
     }
 
     public function destroy(Category $category)
     {
-        $category->delete();
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        try {
+            $category->delete();
+            return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('categories.index')->with('error', 'Failed to delete category: ' . $e->getMessage());
+        }
     }
 }
-    
